@@ -1,0 +1,22 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: demo-consumer
+  cloud:
+    # Nacos \u4F5C\u4E3A\u6CE8\u518C\u4E2D\u5FC3\u7684\u914D\u7F6E\u9879
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+# Dubbo \u914D\u7F6E\u9879\uFF0C\u5BF9\u5E94 DubboConfigurationProperties \u7C7B
+dubbo:
+  protocol:
+    name: dubbo
+    port: -1
+  # Dubbo \u670D\u52A1\u6CE8\u518C\u4E2D\u5FC3\u914D\u7F6E\uFF0C\u5BF9\u5E94 RegistryConfig \u7C7B
+  registry:
+    address: spring-cloud://127.0.0.1:8848 # \u6307\u5B9A Dubbo \u670D\u52A1\u6CE8\u518C\u4E2D\u5FC3\u7684\u5730\u5740
+  # Spring Cloud Alibaba Dubbo \u4E13\u5C5E\u914D\u7F6E\u9879\uFF0C\u5BF9\u5E94 DubboCloudProperties \u7C7B
+  cloud:
+    subscribed-services: demo-provider # \u8BBE\u7F6E\u8BA2\u9605\u7684\u5E94\u7528\u5217\u8868\uFF0C\u9ED8\u8BA4\u4E3A * \u8BA2\u9605\u6240\u6709\u5E94\u7528\u3002

@@ -1,0 +1,32 @@
+server:
+  port: 28083
+
+spring:
+  application:
+    name: account-service
+
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/seata_account?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: wp123456
+
+  cloud:
+    # Nacos \u4F5C\u4E3A\u6CE8\u518C\u4E2D\u5FC3\u7684\u914D\u7F6E\u9879
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+
+# Seata \u914D\u7F6E\u9879\uFF0C\u5BF9\u5E94 SeataProperties \u7C7B
+seata:
+  enabled: true
+  application-id: ${spring.application.name} # Seata \u5E94\u7528\u7F16\u53F7\uFF0C\u9ED8\u8BA4\u4E3A ${spring.application.name}
+  tx-service-group: my_test_tx_group # Seata \u4E8B\u52A1\u7EC4\u7F16\u53F7\uFF0C\u7528\u4E8E TC \u96C6\u7FA4\u540D
+  enable-auto-data-source-proxy: true
+  # Seata \u670D\u52A1\u914D\u7F6E\u9879\uFF0C\u5BF9\u5E94 ServiceProperties \u7C7B
+  service:
+    # \u865A\u62DF\u7EC4\u548C\u5206\u7EC4\u7684\u6620\u5C04
+    vgroup-mapping:
+      my_test_tx_group: default
+    grouplist:
+      default: 127.0.0.1:8091
